@@ -7,8 +7,5 @@ OBJECTS = $(patsubst %.s, %.o, $(wildcard *.s))
 
 all: $(OBJECTS)
 
-%.o: %.s
-	$(AS) $< -o $@
-
 clean:
 	$(RM) $(OBJECTS)
