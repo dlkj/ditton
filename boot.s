@@ -27,7 +27,7 @@ _start:
         movl $stack_top, %esp
 
         #call the kernel entry point
-        #call kernel_main
+        call kernel_main
 
         #if the kernel returns
         #disable interupts
