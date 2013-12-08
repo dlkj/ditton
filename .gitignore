@@ -12,5 +12,8 @@
 *.la
 *.a
 
+# compiled image file
+*.bin
+
 #emacs temp files
 *~
