@@ -6,7 +6,7 @@
 class Console {
 private:
 
-  const volatile uint16_t* buffer;
+  volatile uint16_t * const buffer;
   const uint32_t width = 80;
   const uint32_t lines = 25;
 
@@ -14,7 +14,7 @@ private:
   uint32_t y = 0;
 
 public:
-  Console(volatile uint16_t* buffer);
+  Console(volatile uint16_t* const buffer);
   Console();
 
   void clear();

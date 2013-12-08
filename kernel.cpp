@@ -14,5 +14,7 @@ void kernel_main()
   Console console;
   
   console.clear();
-  console.printk("Hello, world!");
+  console.printk("Hello, world!\n");
+  console.printk("Hello, world!\n");
+  console.printk("Hello, world!\n");
 }
