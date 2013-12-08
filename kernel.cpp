@@ -5,21 +5,51 @@
 #error "You are not using a cross-compiler"
 #endif
 
+class Console {
+private:
+
+  const volatile uint16_t* buffer;
+  const uint32_t width = 80;
+  const uint32_t lines = 25;
+
+  uint32_t x = 0;
+  uint32_t y = 0;
+
+public:
+  Console(volatile uint16_t* buffer):
+    buffer(buffer)
+  {
+  }
+  
+  Console(): Console((volatile uint16_t*) 0xB8000)
+  {
+  }
+
+  void clear(){
+    for(volatile uint16_t* position = (volatile uint16_t*)buffer; position < buffer + width * lines; ++position)
+      {
+        *position = 0;
+      }
+
+  }
+
+  void printk(const char* s)
+  {
+    volatile uint16_t* terminalBuffer = (volatile uint16_t*) 0xB8000;
+    const uint16_t color = 7;
+
+    while (*s != '\0'){
+      *terminalBuffer++ = *s++ | color << 8;
+    }
+  }
+};
+
 extern "C"
 void kernel_main()
 {
-  uint16_t* terminalBuffer = (uint16_t*) 0xB8000;
-  terminalBuffer[0] = 'H' | 15 << 8;
-  terminalBuffer[1] = 'e' | 15 << 8;
-  terminalBuffer[2] = 'l' | 15 << 8;
-  terminalBuffer[3] = 'l' | 15 << 8;
-  terminalBuffer[4] = 'o' | 15 << 8;
-  terminalBuffer[5] = ',' | 15 << 8;
-  terminalBuffer[6] = ' ' | 15 << 8;
-  terminalBuffer[7] = 'w' | 15 << 8;
-  terminalBuffer[8] = 'o' | 15 << 8;
-  terminalBuffer[9] = 'r' | 15 << 8;
-  terminalBuffer[10] = 'l' | 15 << 8;
-  terminalBuffer[11] = 'd' | 15 << 8;
-  terminalBuffer[12] = '!' | 15 << 8;
+
+  Console console;
+  
+  console.clear();
+  console.printk("Hello, world!");
 }

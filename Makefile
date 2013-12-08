@@ -2,7 +2,7 @@ AS := i586-elf-as
 CC := i586-elf-gcc
 CXX := i586-elf-g++
 
-CPPFLAGS := -g -ffreestanding -O2 -Wall -Wextra
+CPPFLAGS := -g -ffreestanding -O2 -Wall -Wextra -std=c++1y
 LDFLAGS := -nostdlib -lgcc
 
 RM := rm -f
