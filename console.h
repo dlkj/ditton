@@ -13,7 +13,7 @@ private:
   unsigned int x = 0U;
   unsigned int y = 0U;
 
-  void clearLine(unsigned int line);
+  void scrollBuffer();
 
 
 public:

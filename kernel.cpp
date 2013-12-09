@@ -10,12 +10,11 @@
 extern "C"
 void kernel_main()
 {
-
   Console console;
   
   console.clear();
 
-  for(auto i = 0U; i < 20; ++i)
+  for(auto i = 0U; i < 30; ++i)
     {
       console.printk("Hello, world!\n");
     }

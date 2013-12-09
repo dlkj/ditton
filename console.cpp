@@ -19,10 +19,16 @@ void Console::clear()
   x = y = 0;
 }
 
-void Console::clearLine(unsigned int line){
-  for(auto position = buffer + width * line; position < (buffer + width * (line + 1)); ++position)
+void Console::scrollBuffer(){
+  auto position = buffer;
+  while(position < buffer + width * (lines - 1))
     {
-      *position = 0;
+      *position = *(position + width);
+      ++position;
+    }
+  while(position < buffer + (width * lines))
+    {
+      *position++ = 0;
     }
 }
 
@@ -31,10 +37,6 @@ void Console::printk(const char* s)
   const uint16_t color = 7;
 
   while (*s != '\0'){
-
-    if(x == 0) {
-      clearLine(y);
-    }
 
     const char current = *s++;
 
@@ -50,10 +52,11 @@ void Console::printk(const char* s)
         break;
       }
 
-    if(y >= lines)
+    while(y >= lines)
       {
         x = 0;
-        y = 0;
+        --y;
+        scrollBuffer();
       }
         
     if(x >= width)
