@@ -7,11 +7,14 @@ class Console {
 private:
 
   volatile uint16_t * const buffer;
-  const uint32_t width = 80;
-  const uint32_t lines = 25;
+  const unsigned int width = 80U;
+  const unsigned int lines = 25U;
 
-  uint32_t x = 0;
-  uint32_t y = 0;
+  unsigned int x = 0U;
+  unsigned int y = 0U;
+
+  void clearLine(unsigned int line);
+
 
 public:
   Console(volatile uint16_t* const buffer);
